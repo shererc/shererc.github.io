@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+ <head>
+ <meta charset="UTF-8">
+  <title>USDA how-to API</title>
+  <link rel="stylesheet" href="style.css" type="text/css">
+    <script>
+    </script>
+<body>
+<form>
+<h1>
+   USDA API How-To
+   <br>
+   <by> by: Caleb Sherer </by>
+</h1>
+<br>
+<br>
+<img src="howtophotos/usda.jpg.jpg" alt="USDAGRADE" align= "right">
+
+<h2>
+  Introduction:
+    <ul>
+      <li>
+         <h3>
+          Beginning Info
+         </h3>
+      </li>
+            <ul>
+                <li>
+                    This how to guide is an introductory guide to using the USDA API to pull information about the desired products.
+                </li>
+                <li>
+                    Before using this guide, basic understandings of Javascript and HTML is required. This guide will not be covering those basics, however there are many tutorials in place that cover both aspects.
+                </li>
+                <li>
+                    Without furthur delay lets get into the fun.
+                </li>
+            
+            </ul>
+            <br>
+      <li>
+        <h3>
+          USDA what is it and why is it important
+        </h3>
+        </li>
+            <ul>
+                <li>
+                    The USDA or United States Department of Agriculture is responsible for a large portion of the food products in the United States. These resposiblities range from overseeing the American farmers to ensuring health regulations on foods purchased in supermarkets.
+                </li>
+                <br>
+                <li>
+                    While the USDA is responsible for a large portion of the foods industry, it specifically is responsible for meat, poultry, and egg products. This responsibility starts on farms to ensure safe, and ethical means of production and distribution of meat and poultry products.
+                </li>
+                <br>
+                <li>
+                    The USDA's resposibility goes beyond the farms by ensuring proper harvest and packaging of meat products and also oversees accurate labeling of the packaged meat.
+                </li>
+                <br>
+                <li>
+                This was a breif overview of the responsibilities covered by the USDA, if you would like to learn more, visit the <a href= "https://www.usda.gov/wps/portal/usda/usdahome"> USDA webite </a> for more information.
+                </li>
+            </ul>
+            <br>
+            
+        <li>
+        
+        <h3>
+          Getting Started
+        </h3>
+      </li>
+      <ul>
+      
+      
+      <li>
+        API or Application Programming Interface is web based service provided by the domain holder to allow the user to have access to certain aspects of the domain.  
+      </li>
+      <br>
+      <li>
+        The tools that the USDA API contains are food reports, lists, nutrients reports and much more. Before starting to code, you must first get set up with an API key.An API key is important for the domain to ensure that no users are pulling too many requests, and the maximum requests per hour for the USDA is 1,000 per IP adress. The USDA allows REST access to their databse and can be read about on the USDA API page <a href= "https://ndb.nal.usda.gov/ndb/api/doc"> here </a>.
+      </li>
+      <br>
+      <li>
+        To obtain an API key, navigate the the <a href= "https://ndb.nal.usda.gov/ndb/api/doc"> USDA API </a> website and click the link to "Sign up now". After entering a valid email adress, an API key will be sent to you!
+      </li>
+      <br>
+      <img src="howtophotos/Access.jpg" alt="USDAsignUP" align= "center">
+      <br>
+      <br>
+      <li>
+      After your API key has been sent, <font color = "red"><b>DO NOT </b></font> share this key with anyone because any activity done with that key will considered activity done on your behalf.
+      </li>
+      <br>
+      <li>
+        Now that you have your API key we can start using it to do the fun stuff, CODE!
+      </li>
+      </ul>
+    </ul>
+</h2>
+<br>
+<h2>
+Learning the Code
+</h2>
+  <ul>
+      <li>
+      <h3>
+        Search Types
+        <ul>
+            <li>
+              The first aspect of learning the USDA API is to know the different ways by which you can pull the information from the database. These ways are:
+            </li>
+          <ol>
+              <li>
+                Food Reports
+              </li>
+              <li>
+                Lists
+              </li>
+              <li>
+                Nutrient Reports
+              </li>
+              <li>
+                Generic Search
+              </li>
+          </ol>
+          <br>
+          <li>
+            All of these methods use similar methods to obtain the data, however the way in which the data is presented is different. This guide will not go into detail on the different methods due to the detailed overview of the different options found <a href= "https://ndb.nal.usda.gov/ndb/api/doc"> here </a>. This how-to will focus mainly on the generic search. We will not cover all of the listed search options because the different searches are used together, for example when we  use the generic "search" for a specific parameter it will actually pull a "list", thus it is not as important which type of search is used because they return similar data. The descriptions of each search is given below via the USDA API page.
+          </li>
+          <br>
+          		<img src="howtophotos/search.jpg" alt="USDAsearch" align= "center">
+          <br>
+          </ul>
+      </h3>
+      <h3>
+        Beginning Code Query String
+      
+        <ul>
+            <li>
+              For the first part of learning to use the API is to ust a GET query string to obtain information from the database. This is done by:  
+            </li>
+            <br>
+            <ol>
+                  <li>
+                    begin with the base URL: <code> https://api.nal.usda.gov/ndb/search/?format=json</code>
+                  </li>
+                  <ul>
+                      <li>
+                      First, <code>https://api.nal.usda.gov/ndb/search/</code> is the generic URL for the USDA database. The "search" parameter tells the database that they type of search is going to be a generic search.
+                      </li>
+                      <li>
+                        Next, <code>?format=json</code> shows how the data will be recieved from the database. In this case we will be using JSON as it is easier to interpret from USDA
+                      </li>
+                  </ul> 
+                  <br>
+                 <li>
+                   The next step is to add the parameters for the search. The resulting URL will resemble: <code>https://api.nal.usda.gov/ndb/search/?format=json&q="search_word"&max="number_of_results"&offset="array_index_start"</code>
+                 </li>
+                 <ul>
+                  <li>  <code>&q="search_word"</code> is The first element of the search parameters. "&q" is the key word that the user would like to search. for Example if the user wanted to find all products that had to do with milk the input would be <code>&q=milk</code>. This will give the user an array of items that in some way contain milk.
+                  </li>
+                  <li>
+                  <code>&max="number_of_results"</code> is the next parameter is . "&max" is representative of the maximum number of results the user would like to see. Continuing the milk example, if the parameters were <code>&q=milk&max=10</code>, the result will be an array of 10 items that contain milk.
+                  </li>
+                  <li>
+                    <code>&offset="array_index_start"</code> is the final search parameter. &offset is representative of the index at which the list will start. This works by telling where in the given array of items the user would like the index to start. Thus if the parameters were <code>&q=milk&max=2&offset=2</code> the database will not return the first item that contains milk, it will return the 3rd item of the list. 
+                  </li>
+                 </ul>
+                 <br>
+                <li>
+                  The final parameter is the API key
+                </li>
+                    <ul>
+                    <li>
+                      The final parameter is <code>&api_key="your_api_key"</code>. This is where you will enter your personal API key given to you.
+                    </li>
+                    
+                    </ul>
+                    <br>
+                 <li>
+                   Putting it all Together!
+                 </li>
+                   <ul>
+                   <li>
+                     Now that we have all of the parameters for a GET request we can put it all together into the final URL: <code>https://api.nal.usda.gov/ndb/search/?format=json&q="search_word"&max="number_of_results"&offset="array_index_start"&api_key="your_api_key"</code>. An example of a query requesting 5 products that contain milk, starting at an index of 0 would be: <code>https://api.nal.usda.gov/ndb/search/?format=json&q=milk&max=5&offset=0&api_key="your_api_key"</code> with "your_api_key" replaced with your key.
+                   </li>
+                   
+                   </ul>
+                   <br>
+                 <li>
+                   Results of the GET URL
+                 </li>
+                 <ul>
+                   <li>
+                     The result of the URL <code>https://api.nal.usda.gov/ndb/search/?format=json&q=milk&max=5&offset=0&api_key="your_api_key"</code> is:
+                     <br>
+                     <br>
+                     <pre>
+                     {
+    "list": {
+        "q": "milk",
+        "sr": "28",
+        "ds": "any",
+        "start": 0,
+        "end": 5,
+        "total": 5067,
+        "group": "",
+        "sort": "r",
+        "item": [
+            {
+                "offset": 0,
+                "group": "Branded Food Products Database",
+                "name": "MILK MAGIC, CHOCOLATE MILK STRAWS, CHOCOLATE MILK, UPC: 803810234951",
+                "ndbno": "45100704",
+                "ds": "BL"
+            },
+            {
+                "offset": 1,
+                "group": "Branded Food Products Database",
+                "name": "MILK CREME MILK CHOCOLATE BARS WITH A CREAMY MILK FILLING, UPC: 072799831226",
+                "ndbno": "45201826",
+                "ds": "BL"
+            },
+            {
+                "offset": 2,
+                "group": "Branded Food Products Database",
+                "name": "WEIS, BETTER'N SKIM, A NON-FAT MILK WITH THE TASTE OF 2% MILK!, SKIM MILK, UPC: 041497099535",
+                "ndbno": "45236270",
+                "ds": "BL"
+            },
+            {
+                "offset": 3,
+                "group": "Beverages",
+                "name": "Beverages, rice milk, unsweetened",
+                "ndbno": "14639",
+                "ds": "SR"
+            },
+            {
+                "offset": 4,
+                "group": "Dairy and Egg Products",
+                "name": "Protein supplement, milk based, Muscle Milk, powder",
+                "ndbno": "01223",
+                "ds": "SR"
+            }
+        ]
+    }
+}
+                     </pre>
+                     While this JSON return data does work from the URL, it is hugely inefficient to retype a URL everytime we need to pull a query. Also this leaves room for user error. In order to avoid this we will create the querys using Javascript.
+                   </li>
+                 
+                 </ul>
+                  
+            </ol>
+            
+        </ul>
+        </h3>
+        <h3>
+        JavaScript Implementation
+        <ul>
+        	<li>
+        		The first step to making an efficient request is to eleminate as much error as possible from user input. This can be accomplished by using variables for each of the search parameters then build the URL using the variables. First we start a new request to the server in order to pull the query.
+        	</li>
+        	<pre>
+        	var website = new XMLHttpRequest();
+        	var searchParam = milk;
+        	var searchMax = 5;
+        	var persKey = "your personal API key"
+
+        	var fullURL = "https://api.nal.usda.gov/ndb/search/?format=json&q=" + searchParam + "&sort=n&max=" + searchMax + "&offset=0&api_key=" + persKey;
+        	website.open("GET", fullURL, true);
+
+        	</pre>
+        	<li>
+        		The broken down URL into variables makes it much easier to edit the parameters. We then make a GET request to the database to get the JSON data that is shown above.
+        	</li>
+        	<br>
+        	<h4>
+        	Elements of Items
+        	</h4>
+        	<li>
+        		Now that we have broken the URL down into more managable peices, we can start making the JSON data recieved easier to read. We can also make the UI more user friendly. the first step to accomplishing this is understanding how to pull each element of the data to be used. Each API has different calls by which information can be obtaained. This API is as follows:
+        		<br>
+        		<br>
+        		<ol>
+        			<li>
+        				First we must parse the data recieved from the database. This can be done by setting a variable to receive the parsed JSON information
+        					<ul>
+        						<code>
+        							var response = (JSON.parse(website.responseText) stores the information in the response variable
+        						</code>
+        					</ul>
+        					<br>
+        			</li>
+        			<li>
+        				Next we can use the response variable to access each element of the items.
+        					<ul>
+        						<li>
+        							We can get the name of an item by the call: <code>response.list.item["offset"].name</code> This works by getting the parsed JSON information, finding the list of items retruned with the <code>response.list</code>
+        						</li>
+        						<li>
+        							Next we can get a specific item of the list with <code>response.list.item["offset"]</code> where ".item" accesses the item object, and "offset" is replaced by the offset number of the item.
+        						</li>
+        						<li>
+        							Finally we access the name of the item with <code>response.list.item["offset"].name</code> 
+        						</li>
+        						<li>
+        							This template can be used to access all the information from each item such as the ID number, group, and offset number. 
+        						</li>
+        					</ul>
+        			</li>
+        		</ol>
+        		<br>
+        		<ul>
+        			Now that we undersand how to access each element, we can make the data easier to read. This is accomplished by pulling specific paramaters from the raw data, such as the name, group, offset, and ndbno number. As an example, if we pull the information of the object with an offset of 0 when we search milk, as done before, we get:
+<pre>
+			var website = new XMLHttpRequest();
+        	var searchParam = milk;
+        	var searchMax = 5;
+        	var persKey = "your personal API key"
+
+        	var fullURL = "https://api.nal.usda.gov/ndb/search/?format=json&q=" + searchParam + "&sort=n&max=" + searchMax + "&offset=0&api_key=" + persKey;
+        	website.open("GET", fullURL, true);
+        	 website.addEventListener("load", function(){
+        	//parse the data
+        	var response = (JSON.parse(website.responseText)); 
+        	//get each of the data printed to the screen in the correct searchParam
+        	console.log(response.list.item["0"].name);	//prints the name to the console
+        	console.log(response.list.item["0"].ndbno);	//prints the ID number to the console
+        	console.log(response.list.item["0"].group);	//prints the group to the console
+        	console.log(response.list.item["0"].offset); //prints the offset to the  console
+</pre>
+
+			<br>
+			The result printed to the console is:
+<pre>
+ABDALLAH, RABBIT TAIL MARSHMALLOWS WITH MILK CHOCOLATE, UPC: 766684092105
+45166159
+Branded Food Products Database
+0
+</pre>
+			This result matches with the raw data presented when we pulled all 5 list objects, however it is much easier to interpret.
+
+        	</li>
+        	<br>
+
+        	<li>
+        		The final step is the make the UI more user friendly. This is done by including HTML/JS/CSS in order to created a working webPage. One example that can be done with this database is shown below.
+        </ul>
+
+        	<h4>
+        	JAVASCRIPT/HTML
+        	<iframe width="100%" height="300" src="https://jsfiddle.net/shererc/3mr7wemz/embedded/js,html,css,result/dark/" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+
+        	<br>
+
+        	<li>Breaking this code down, we create an event listenter to create a button that the user can use to submit what parameters the user would like the lookup. </li>
+        	<br>
+        	<li>This example allows the user to input the search parameter(i.e. milk, cheese, meat, eggs) and which index of that search they would like to get. </li>
+        	<br>
+        	<li> it then neatly prints the results of the search to the screen in a way that is easily read by the user.
+        	</h4>
+        </h3>
+        <br>
+
+        <h3>
+        Final Thoughts and Challenge
+
+        	<br>
+        	<p>
+        		Now we have learned the basics of the USDA API. The topics covered are:
+        		<ol>
+        			<li>
+        				What the USDA is and Why it is important
+        			</li>
+        			<li>
+        				How to get started with your API key through the USDA website
+        			</li>
+        			<li>
+        				The different types of search methods, with an emphasis on generic search
+        			</li>
+        			<li>
+        				How to create a URL to pull a GET request from the USDA database
+        			</li>
+        			<li>
+        				How to make a GET call more efficient by using Javascript
+        			</li>
+        			<li>
+        				How to inturpret the data recieved and turn it into a user friendly UI
+        			</li>
+        			<li>
+        				Putting it all together into a functional program
+        			</li>
+        		</ol>
+        	</p>
+<br>
+        	<p>
+        	With this new wealth of knowledge, the next step is to go out and create your own programs that call the USDA API. Try some of the following challenges
+
+        		<ol>
+        			<li>
+        				Allow the user to choose the maximum number of elements returned in a list, not just the search paramenter and the offset number.
+        			</li>
+        			<li>
+        				Allow the user to choose the number of elements they would like to see the information on. 
+        			</li>
+        			<li>
+        				Print the list to the screen of the elements the user would like to know about
+        			</li>
+        		</ol>
+        	</p>
+
+        	<br>
+
+        	<final>THANK YOU for visiting the USDA API how-to </final>
+        	<br>
+        	<final1> Created by Caleb Sherer for CS290 how-to </final1>
+         	</h3>
+        
+      </li>
+      
+  </ul>
+
+</form>
+ </body>
+</html>
